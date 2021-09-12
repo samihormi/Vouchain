@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Blockchain Client</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+  </head>
+
+  <body>
+
+    <style>
+      .hide{
+        display: none;
+      }
+      .show{
+        display: block;
+      }
+
+      .modal-backdrop{
+        opacity:0.5 !important;
+      } 
+      #basicModalDialogue{
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+      .modal-content{
+        margin-top: 250px;
+      }
+      #success_registration_modal{
+        margin-top: auto;
+      }
+    </style>
+
+    <!-- Navigation -->
+    {% include '_navbar.html' %}
+
+    <!--Warning-->
+    <div id = "warning" class="alert alert-danger alert-dismissible hide">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <strong>Warning!</strong> The information you input is not valid. Please try again!
+    </div>
+
+    <!-- Header  -->
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+
+          <div class="card-body">
+            <h4 class="card-title">Programme Registration</h4>
+            <p class="card-text">Enter your valid information below and click on "Submit" to complete your registration</p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <br>
+
+    <!-- Registration -->
+    <div class="container alert alert-secondary">
+    
+      <!-- Have to extend the registration file with navbar as the base, and add on to it -->
+      
+      {% block body %}
+          <h1>Register</h1>
+          {% from "_formhelpers.html" import render_field %}
+          <form id = "registration_form" method="POST" action="">
+            <div class ="form-group" id="applicant_first_name">
+              {{render_field(form.firstname, class="form-control")}}
+            </div>
+            <div class ="form-group" id="applicant_last_name">
+              {{render_field(form.lastname, class="form-control")}}
+            </div>
+            <div class ="form-group" id="applicant_hkid">
+              {{render_field(form.hkid, class="form-control")}}
+            </div>
+            <div class ="form-group" id="applicant_email">
+              {{render_field(form.email, class="form-control")}}
+            </div>
+            <div class ="form-group" id="applicant_password">
+              {{render_field(form.password, class="form-control")}}
+            </div>
+            
+            <div class="row">
+              <div class="col-lg-12 text-center">
+                <input type="button" onclick="submission()" id="generate_registration" class="btn btn-primary btn-lg valid" value="Submit">
+              </div>
+            </div>
+          </form>
+      {% endblock %}
+    <!--</form>-->
+    </div>
+
+
+    <!-- Registration Confirmation -->
+    <div class="modal modal-alert fade modal-dialog-centered" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+
+        <div class="modal-content">
+
+          <div class="modal-header">
+            <div class="modal-title col-md-10">Confirm your application, verify the accuracy of the your details before submission for processing by the government </div>
+            <button type="button" class="close col-md-2" data-dismiss="modal" aria-hidden="true">&times;</button>
+          </div>
+
+          <div class="modal-body">
+
+            <form id="confirmation_registration_form">
+
+                <div class="row">
+                  <label class="col-sm-12">First name:</label>
+                  <div class="col-sm-12">
+                    <input type="text" name="applicant_first_name" id="confirmation_applicant_first_name" rows="2" class="form-control" >
+                  </div>
+                </div>
+                
+                <div class="row">
+                  <label class="col-sm-12">Last name:</label>
+                  <div class="col-sm-12">
+                    <input type="text" name="applicant_last_name" id="confirmation_applicant_last_name" rows="2" class="form-control" >
+                  </div>
+                </div>
+
+                <div class="row">
+                  <label class="col-sm-2">HKID:</label>
+                  <div class="col-sm-12">
+                    <input type="text" name="applicant_hkid" id="confirmation_applicant_hkid" rows="2" class="form-control">
+                  </div>
+                </div>
+                <br>
+
+                <div class="row">
+                  <label class="col-sm-2">Email:</label>
+                  <div class="col-sm-12">
+                    <input type="text" name="applicant_email" id="confirmation_applicant_email" rows="2" class="form-control">
+                  </div>
+                </div>
+                <br>
+
+              <div class="row">
+                  <label class="col-sm-12">Public Key:</label>
+                  <div class="col-sm-12">
+                    <input type="text" name="applicant_public_key" id="applicant_public_key" rows="2" class="form-control" readonly>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <label class="col-sm-12">Transaction Signature:</label>
+                  <div class="col-sm-12">
+                    <input type="text" name="signature" id="transaction_signature" rows="2" class="form-control" readonly>
+                  </div>
+                </div>
+              
+              
+            </form>
+
+
+            <div class="row">
+              <label class="col-sm-12">Blockchain Node URL:</label>
+              <div class="col-sm-12">
+                <input type="text" name="node_url" id="node_url" rows="2" class="form-control" value="http://127.0.0.1:5000">
+              </div>
+            </div>
+
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+            <button type="button" id="button_confirm_application" class="btn btn-success">Confirm Application</button>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+
+    <!-- Alert Message for successful registration -->
+    <div class="modal modal-alert fade" id="success_registration_modal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+      <div class="modal-dialog" id="basicModalDialogue">
+        <div class="modal-content">
+
+          <div class="modal-header">
+            <h5 class="modal-title">Confrimation</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          </div>
+
+          <div class="modal-body">
+            <div class="alert alert-success" role="alert">
+              <h4 class="alert-heading">Successful Transaction!</h4>
+              <p>You successfully completed your registration. It will be added to the next block.</p>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" id="button_confirm_application" class="btn btn-success" data-dismiss="modal">OK</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="/static/vendor/jquery/jquery.min.js"></script>
+    <script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+
+    <script>
+
+      document.getElementById("generate_registration").onclick = function() {submission()};
+      function submission(){
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("confirmation_applicant_first_name").value = "Hiii";
+            //document.getElementById("confirmation_applicant_first_name").value = this.responseText;
+          }
+        };
+        xhttp.open("GET", "/generate/registration", true);
+        xhttp.send();
+
+      
+
+        //if(document.getElementById("generate_registration").classList.contains("valid"))
+        // document.getElementById("confirmation_applicant_first_name").value = document.getElementById("firstname").value;
+        // document.getElementById("confirmation_applicant_last_name").value = form.applicant_first_name;
+        // document.getElementById("confirmation_applicant_hkid").value = form.name;
+        // document.getElementById("confirmation_applicant_email").value = document.getElementById("registration_form").data;
+        // document.getElementById("applicant_public_key").value = response["public_key"];
+        // document.getElementById("transaction_signature").value = response["signature"];
+
+        // $("#basicModal").modal('show');
+      }
+
+      $(function () {
+          $("#generate_registration").click(function () {
+
+            $.ajax({
+              url: "/generate/registration",
+              method: 'POST',
+              dataType : 'json',
+              data: $('#registration_form').serialize(),
+              success: function(response){
+                if(response["valid"]){
+                  
+                  document.getElementById("confirmation_applicant_first_name").value = response["registration"]["applicant_first_name"];
+                  document.getElementById("confirmation_applicant_last_name").value = response["registration"]["applicant_last_name"];
+                  document.getElementById("confirmation_applicant_hkid").value = response["registration"]["applicant_hkid"]
+                  document.getElementById("confirmation_applicant_email").value = response["registration"]["applicant_email"]
+                  document.getElementById("applicant_public_key").value = response["public_key"];
+                  document.getElementById("transaction_signature").value = response["signature"];
+                  // document.getElementById("confirmation_amount").value = response["registration"]["value"];
+
+                  $("#basicModal").modal('show');
+
+                }
+                else{
+                  $("#warning").toggleClass("show");
+                  $("#warning").removeClass("hide");
+                  setTimeout(function(){
+                    $("#warning").toggleClass("hide");
+                    $("#warning").removeClass("show");
+                  },2000);
+                }
+              
+                /*document.getElementById("confirmation_applicant_first_name").value = response["registration"]["applicant_first_name"];
+                document.getElementById("confirmation_applicant_last_name").value = response["registration"]["applicant_last_name"];
+                document.getElementById("confirmation_applicant_hkid").value = response["registration"]["applicant_hkid"]
+                document.getElementById("confirmation_applicant_email").value = response["registration"]["applicant_email"]
+                document.getElementById("applicant_public_key").value = response["public_key"];
+                document.getElementById("transaction_signature").value = response["signature"];
+                // document.getElementById("confirmation_amount").value = response["registration"]["value"];
+
+                $("#basicModal").modal('show');*/
+                
+              },
+              error: function(error){
+                console.log(error);
+              }
+            });
+
+          });
+      });
+
+
+      $(function () {
+          $("#button_confirm_application").click(function () {
+            //console.log($('#confirmation_registration_form').serialize());
+
+            $.ajax({
+              url: document.getElementById("node_url").value + "/registrations/new",
+              type: "POST",
+              headers: {'Access-Control-Allow-Origin':'*'},
+              dataType : 'json',
+              data: $('#confirmation_registration_form').serialize(),
+              success: function(response){
+                  document.getElementById("registration_form").submit();
+                
+                  $("#registration_form")[0].reset();
+                  $("#confirmation_registration_form")[0].reset();
+                
+                //clean text boxes
+                  $("#applicant_first_name").val("");
+                  $("#applicant_last_name").val("");
+                  $("#applicant_hkid_name").val("");
+                  $("#applicant_email").val("");
+                // $("#applicant_public_key").val("");
+                // $("#applicant_address").val("");
+                // $("#amount").val("");
+
+                  $("#basicModal").modal('hide');
+                  $("#success_registration_modal").modal('show');
+                
+              
+                
+              
+                //reset both forms
+                
+                
+              },
+              error: function(error){
+                console.log(error);
+              }
+            });
+
+          });
+      });
+
+    </script>
+
+
+  </body>
+
+</html>

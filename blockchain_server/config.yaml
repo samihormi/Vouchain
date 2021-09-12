@@ -1,0 +1,46 @@
+public_root: data/root
+server:
+  - id: HKGOV
+    type: admin
+    root: data/HKGOV
+    port: 16489
+operators:
+  - id: HKGOV
+    type: admin
+    root: data/HKGOV
+    port: 16489
+  - id: Octopus
+    type: merchant
+    root: data/Octopus
+    port: 16490
+  - id: PayMe
+    type: merchant
+    root: data/PayMe
+    port: 16491
+  - id: AliPay
+    type: merchant
+    root: data/AliPay
+    port: 16492
+peers:
+  - id: orderer
+    type: orderer
+    root: data/orderer
+    bind_addr: [ 127.0.0.1, 16848 ]
+    public_addr: [ 127.0.0.1, 16848 ]
+  - id: endorser1
+    type: endorser
+    root: data/endorser1
+    bind_addr: [ 127.0.0.1, 16845 ]
+    public_addr: [ 127.0.0.1, 16845 ]
+  - id: endorser2
+    type: endorser
+    root: data/endorser2
+    bind_addr: [ 127.0.0.1, 16846 ]
+    public_addr: [ 127.0.0.1, 16846 ]
+  - id: endorser3
+    type: endorser
+    root: data/endorser3
+    bind_addr: [ 127.0.0.1, 16847 ]
+    public_addr: [ 127.0.0.1, 16847 ]
+web:
+  static_root: frontend/dist
