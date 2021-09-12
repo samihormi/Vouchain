@@ -2,8 +2,10 @@
 Blockchain Voucher system for the Hong Kong Governement subsidy programme
 
 ## Overview
-Issuing vouchers is an alternative means to implement social welfare. While paper-based vouchers are a working method, they are nonetheless susceptible to security troubles such as counterfeiting, reproduction, and a relatively low effectiveness.
-Vouchain is an alternative system that deals with those constrains, by establishing a client/server side funnel, by which governemet entities can authorise users satisfying social status(ie. permaent residence) and operators(eg Alipay, Octopus, PayMe) to redeem vouchers and approve transactions, respectively.
+Issuing vouchers is an alternative means to implement social welfare. While paper-based vouchers are a working method, they are nonetheless susceptible to security troubles such as counterfeiting, reproduction, and a relatively low effectiveness.  
+
+Vouchain is an alternative system that deals with those constrains, by establishing a client/server side funnel, by which governemet entities can authorise users satisfying social status(ie. permaent residence) and operators(eg Alipay, Octopus, PayMe) to redeem vouchers and approve transactions, respectively.  
+
 The properties of this system include but are not limited to: confidentiality, integrity, authenticity, non-reproducibility and non-repudiablity, non-transferability, availability and one-time use.
 
 ## Requirements
