@@ -1,45 +1,63 @@
-# Blockchain Python tutorial
-* Source Code for my blog post: [A Practical Introduction to Blockchain with Python](http://adilmoujahid.com/posts/2018/03/intro-blockchain-bitcoin-python/)
+# Vouchain
+Blockchain Voucher system for the Hong Kong Governement subsidy programme
 
-## Important: This project is for educational purposes only and the source code shouldn't be use in production as it doesn't have good security, doesn't scale well and lacks many important features.
+## Overview
+Issuing vouchers is an alternative means to implement social welfare. While paper-based vouchers are a working method, they are nonetheless susceptible to security troubles such as counterfeiting, reproduction, and a relatively low effectiveness.
+Vouchain is an alternative system that deals with those constrains, by establishing a client/server side funnel, by which governemet entities can authorise users satisfying social status(ie. permaent residence) and operators(eg Alipay, Octopus, PayMe) to redeem vouchers and approve transactions, respectively.
+The properties of this system include but are not limited to: confidentiality, integrity, authenticity, non-reproducibility and non-repudiablity, non-transferability, availability and one-time use.
 
+## Requirements
+- Crypto
+- hashlib
+- Json
+- flask 
+- Cryptography
+- Openssl
+- Requests 
+- Flask_cors
+- Binascii
+- Yaml
+- Collections
+
+## Installation  
+
+ - Clone the repository
+```python
+git clone https://github.com/samihormi/Vouchain
+```
+- Install dependencies
+```python
+pip install -r requirements.txt
+```
+
+## Demo 
+ 
+You can deploy the applications throught the client and server commands under blockchain_client and blochain server respectively.
+
+```python
+python blockchain_client.py 
+```
+```python
+python blockchain_server.py 
+```
+(by default the ports are 8080 and 5000 for client and server respectively)
 
 <div style="display:block;margin:auto;height:80%;width:80%">
   <img src="blockchain-simulation.gif">
 </div>
 
-The github repository contains a basic implementation of a blockchain and its client using Python. This blockchain has the following features:
+## Command Guide
+* Client: 
+  * In the client server, the user will be prompted for registration. 
+  * After the registration is verified, the data will be transferred into the blockchain_server for approval from the government. 
+  * Approved users can redeem vouchers by clicking on the use voucher on the navigation bar, however, they can only redeem one voucher per card.   * Users have a total balance of $5,000 HKD. 
+  * Users can also see their previous transaction in the view transactions tab. 
 
-- Possibility of adding multiple nodes to the blockchain
-- Proof of Work (PoW)
-- Simple conflict resolution between nodes
-- Transactions with RSA encryption
+* Server:
+  * Allow/deny user registration.
+  * Approve user registration will generate a bunch of vouchers to the user.
 
-The blockchain client has the following features:
-
-- Wallets generation using Public/Private key encryption (based on RSA algorithm)
-- Generation of transactions with RSA encryption 
-
-This github repository also contains 2 dashboards: 
-
-- "Blockchain Frontend" for miners 
-- "Blockchain Client" for users to generate wallets and send coins 
-
-
-# Dependencies
-
-- Works with ```Python 3.6``` 
-- [Anaconda's Python distribution](https://www.continuum.io/downloads) contains all the dependencies for the code to run.
-
-# How to run the code
-
-1. To start a blockchain node, go to ```blockchain``` folder and execute the command below:
-```python blockchain.py -p 5000```
-2. You can add a new node to blockchain by executing the same command and specifying a port that is not already used. For example, ```python blockchain.py -p 5001```
-3. TO start the blockchain client, go to ```blockchain_client``` folder and execute the command below:
-```python blockchain_client.py -p 8080```
-4. You can access the blockchain frontend and blockchain client dashboards from your browser by going to localhost:5000 and localhost:8080
-
-
-
-# Visit my Blog : http://adilmoujahid.com
+## Acknowledgement
+This system was build on top of the great work done in the following projects:
+ * http://adilmoujahid.com/posts/2018/03/intro-blockchain-bitcoin-python
+ * https://www.mdpi.com/2071-1050/12/8/3362
