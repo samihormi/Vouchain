@@ -43,7 +43,7 @@ python blockchain_server.py
 (by default the ports are 8080 and 5000 for client and server respectively)
 
 <div style="display:block;margin:auto;height:80%;width:80%">
-  <img src="blockchain-simulation.gif">
+  <img src="assets/blockchain-simulation.gif">
 </div>
 
 ## Command Guide
